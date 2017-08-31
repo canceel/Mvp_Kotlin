@@ -83,6 +83,7 @@ class AndroidActivity : RefreshActivity(), AndroidContract.View, AndroidAdapter.
     override fun itemClick(url: String) {
         var intent = Intent()
         intent.setClass(mActivity, BrowserActivity::class.java)
+//        intent.setClass(mActivity, H5Activity::class.java)
         intent.putExtra(BrowserActivity().WEB_URL, url)
         startActivity(intent)
 

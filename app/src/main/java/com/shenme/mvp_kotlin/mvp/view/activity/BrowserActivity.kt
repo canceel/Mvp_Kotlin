@@ -8,9 +8,9 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.ProgressBar
 import com.shenme.mvp_kotlin.R
 import com.shenme.mvp_kotlin.app.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_browser.*
 
 /**
  * Created by CANC on 2017/8/30.
@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_browser.*
 class BrowserActivity : BaseActivity() {
     internal var WEB_URL = "web_url"
     var url: String? = null
+    lateinit var webView: WebView
+    lateinit var progressBar: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_browser)
@@ -25,8 +27,10 @@ class BrowserActivity : BaseActivity() {
     }
 
     fun initData() {
-        url = intent.getStringExtra(WEB_URL);
-        var webSettings = web_view.settings
+        url = intent.getStringExtra("web_url")
+        webView = findViewById(R.id.web_view) as WebView
+        progressBar = findViewById(R.id.progress_bar) as ProgressBar
+        val webSettings = webView.settings
         /**
          * 设置WebView属性，能够执行Javascript脚本
          */
@@ -35,30 +39,29 @@ class BrowserActivity : BaseActivity() {
         webSettings.allowFileAccess = true
         // 设置可以支持缩放
         webSettings.setSupportZoom(true)
-        // 设置默认缩放方式尺寸是far
-        webSettings.defaultZoom = WebSettings.ZoomDensity.MEDIUM
         // 设置出现缩放工具
         webSettings.builtInZoomControls = false
         webSettings.defaultFontSize = 20
         window.setFormat(PixelFormat.TRANSLUCENT)
         //
         webSettings.userAgentString = webSettings.userAgentString + R.string.app_name
-        /** 加载前清除缓存 */
+        /** 加载前清除缓存  */
         webSettings.cacheMode = WebSettings.LOAD_NO_CACHE
-        web_view.clearCache(true)
-        // 设置WebViewClient
-        web_view.setWebViewClient(object : WebViewClient() {
+        webView.clearCache(true)
+        webView.setWebViewClient(WebViewClient())
+        webView.setWebViewClient(object : WebViewClient() {
 
             // 页面开始加载
-            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
+            //TODO kotlin 使用webview在这里会奔溃，不知道为啥
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                progressBar.visibility = View.VISIBLE
                 super.onPageStarted(view, url, favicon)
-                progress_bar.visibility = View.VISIBLE
             }
 
             // 页面加载完成
             override fun onPageFinished(view: WebView, url: String) {
+                progressBar.visibility = View.GONE
                 super.onPageFinished(view, url)
-                progress_bar.visibility = View.GONE
             }
 
             // WebView加载的所有资源url
@@ -69,15 +72,14 @@ class BrowserActivity : BaseActivity() {
 
         })
 
-        // 设置WebChromeClient
-        web_view.setWebChromeClient(object : WebChromeClient() {
+        webView.setWebChromeClient(object : WebChromeClient() {
 
             // 设置网页加载的进度条
             override fun onProgressChanged(view: WebView, newProgress: Int) {
-                super.onProgressChanged(view, newProgress)
-                if (progress_bar != null) {
-                    progress_bar.progress = newProgress
+                if (progressBar != null) {
+                    progressBar.setProgress(newProgress)
                 }
+                super.onProgressChanged(view, newProgress)
             }
 
             // 设置程序的Title
@@ -86,7 +88,6 @@ class BrowserActivity : BaseActivity() {
             }
         })
 
-        web_view.loadUrl(url)
-
+        webView.loadUrl(url)
     }
 }
