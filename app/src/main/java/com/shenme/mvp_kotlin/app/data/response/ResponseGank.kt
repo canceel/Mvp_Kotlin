@@ -1,6 +1,6 @@
 package com.shenme.mvp_kotlin.app.data.response
 
-import com.shenme.mvp_kotlin.net.BaseResult
+import com.shenme.mvp_kotlin.app.net.BaseResult
 
 /**
  * Created by CANC on 2017/8/30.

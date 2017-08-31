@@ -26,7 +26,7 @@ class DateUtils {
      * *
      * @return 日期类
      */
-    private fun dateFormatService(dateString: String): Date? {
+    fun dateFormatService(dateString: String): Date? {
         if (TextUtils.isEmpty(dateString)) {
             return null
         } else {
@@ -58,7 +58,7 @@ class DateUtils {
      * *
      * @return 相应格式的日期String
      */
-    private fun getDate(serviceDate: String, format: String): String {
+    fun getDate(serviceDate: String, format: String): String {
         if (TextUtils.isEmpty(serviceDate)) {
             return ""
         }

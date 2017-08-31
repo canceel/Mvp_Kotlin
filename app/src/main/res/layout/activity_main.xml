@@ -5,13 +5,51 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_hello"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/colorAccent"
         android:padding="20dp"
-        android:text="Hello World!"
-        android:textColor="@color/colorPrimary" />
+        android:text="Android Random 20"
+        android:textColor="#333" />
+
+    <TextView
+        android:id="@+id/tv_ios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="Ios Random 20"
+        android:textColor="#333" />
+
+    <TextView
+        android:id="@+id/tv_front"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="前端 Random 20"
+        android:textColor="#333" />
+
+    <TextView
+        android:id="@+id/tv_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="Video Random 20"
+        android:textColor="#333" />
+
+    <TextView
+        android:id="@+id/tv_Images"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="Images Random 20"
+        android:textColor="#333" />
+
+    <TextView
+        android:id="@+id/tv_expand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="拓展资源 Random 20"
+        android:textColor="#333" />
 
 </LinearLayout>

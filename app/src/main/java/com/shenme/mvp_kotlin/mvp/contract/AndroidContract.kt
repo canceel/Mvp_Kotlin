@@ -19,5 +19,10 @@ interface AndroidContract {
 
     interface Presenter {
         fun getAndroidInfo(pageSize: String)
+        fun getIosInfo(pageSize: String)
+        fun getVideoInfo(pageSize: String)
+        fun getFuliInfo(pageSize: String)
+        fun getExpandInfo(pageSize: String)
+        fun getFrontInfo(pageSize: String)
     }
 }

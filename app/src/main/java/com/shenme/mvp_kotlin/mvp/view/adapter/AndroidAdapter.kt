@@ -2,6 +2,7 @@ package com.shenme.mvp_kotlin.mvp.view.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.shenme.mvp_kotlin.app.utils.DateUtils
  */
 class AndroidAdapter(val context: Context,
                      var datas: List<Gank>,
+                     var type: String?,
                      var lisenter: AndroidListener) : RecyclerView.Adapter<AndroidAdapter.AndroidHolder>() {
 
     fun setData(datas: List<Gank>) {
@@ -32,16 +34,29 @@ class AndroidAdapter(val context: Context,
 
     override fun onBindViewHolder(holder: AndroidHolder, position: Int) {
         var gank = datas[position]
-        if (gank.images != null && gank.images!!.size > 0) {
+        var imagePath: String? = null
+        if ("images".equals(type)) {
+            imagePath = gank.url
+        } else {
+            if (gank.images != null && gank.images!!.size > 0) {
+                imagePath = gank.images!![0]
+            }
+        }
+        if (!TextUtils.isEmpty(imagePath)) {
             holder.imageView.visibility = View.VISIBLE
-            Glide.with(context).load(gank.images!![0]).into(holder.imageView)
+            Glide.with(context).load(imagePath).into(holder.imageView)
         } else {
             holder.imageView.visibility = View.GONE
         }
+        if (TextUtils.isEmpty(gank.desc)) holder.desc.visibility = View.GONE else holder.desc.visibility = View.VISIBLE
         holder.desc.text = gank.desc
+        if (TextUtils.isEmpty(gank.who)) holder.author.visibility = View.GONE else holder.author.visibility = View.VISIBLE
         holder.author.text = "作者: " + gank.who
-        holder.publishedAt.text = DateUtils().getNormalDate(gank.publishedAt!!)
+        if (TextUtils.isEmpty(gank.publishedAt)) holder.publishedAt.visibility = View.GONE else holder.publishedAt.visibility = View.VISIBLE
+        holder.publishedAt.text = "发表于: " + DateUtils().getDate(gank.publishedAt!!, DateUtils().DELIVERY_DATE_FORMATER)
+        if (TextUtils.isEmpty(gank.source)) holder.source.visibility = View.GONE else holder.source.visibility = View.VISIBLE
         holder.source.text = gank.source
+        if (TextUtils.isEmpty(gank.type)) holder.type.visibility = View.GONE else holder.type.visibility = View.VISIBLE
         holder.type.text = gank.type
         holder.llAndroid.setOnClickListener {
             lisenter.itemClick(gank.url!!)

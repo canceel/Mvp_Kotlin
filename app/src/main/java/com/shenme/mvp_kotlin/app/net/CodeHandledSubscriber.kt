@@ -1,4 +1,4 @@
-package com.shenme.mvp_kotlin.net
+package com.shenme.mvp_kotlin.app.net
 
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable

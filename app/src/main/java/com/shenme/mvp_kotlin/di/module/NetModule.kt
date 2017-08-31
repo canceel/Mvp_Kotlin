@@ -3,7 +3,7 @@ package com.shenme.mvp_kotlin.di.module
 import com.shenme.mvp_kotlin.BuildConfig
 import com.shenme.mvp_kotlin.mvp.model.api.ApiService
 import com.shenme.mvp_kotlin.mvp.model.api.Constants
-import com.shenme.mvp_kotlin.net.ResponseConverterFactory
+import com.shenme.mvp_kotlin.app.net.ResponseConverterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

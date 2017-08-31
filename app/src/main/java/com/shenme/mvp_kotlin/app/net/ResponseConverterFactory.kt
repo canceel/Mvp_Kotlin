@@ -1,4 +1,4 @@
-package com.shenme.mvp_kotlin.net
+package com.shenme.mvp_kotlin.app.net
 
 import com.google.gson.Gson
 import okhttp3.ResponseBody
