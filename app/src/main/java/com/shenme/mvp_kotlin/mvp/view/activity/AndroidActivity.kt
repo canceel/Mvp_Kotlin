@@ -14,12 +14,15 @@ import com.shenme.mvp_kotlin.di.module.AndroidModule
 import com.shenme.mvp_kotlin.mvp.contract.AndroidContract
 import com.shenme.mvp_kotlin.mvp.presenter.AndroidPresenter
 import com.shenme.mvp_kotlin.mvp.view.adapter.AndroidAdapter
+import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_android.*
 import javax.inject.Inject
 
 open class AndroidActivity : RefreshActivity(), AndroidContract.View, AndroidAdapter.AndroidListener {
+
     open var REQUEST_TYPE: String = "request_type"
     var requestType: String? = null
+    lateinit var rxPermission: RxPermissions
 
     @Inject
     lateinit var presenter: AndroidPresenter
@@ -31,10 +34,12 @@ open class AndroidActivity : RefreshActivity(), AndroidContract.View, AndroidAda
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_android)
         setupActivityComponent()
+        presenter.getLocationPermission()
         initView()
     }
 
     override fun setupActivityComponent() {
+        rxPermission = RxPermissions(this)
         DaggerAndroidComponent.builder()
                 .androidModule(AndroidModule(this))
                 .netComponent(MyApplication()[this].netComponent)
@@ -139,7 +144,10 @@ open class AndroidActivity : RefreshActivity(), AndroidContract.View, AndroidAda
         intent.setClass(mActivity, H5Activity::class.java)
         intent.putExtra(BrowserActivity().WEB_URL, url)
         startActivity(intent)
+    }
 
+    override fun getRxpermissions(): RxPermissions {
+        return rxPermission
     }
 
 }
