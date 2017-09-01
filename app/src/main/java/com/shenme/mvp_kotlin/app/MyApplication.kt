@@ -1,7 +1,7 @@
 package com.shenme.mvp_kotlin.app
 
-import android.app.Application
 import android.content.Context
+import android.support.multidex.MultiDexApplication
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle
@@ -15,7 +15,7 @@ import com.shenme.mvp_kotlin.di.module.NetModule
 /**
  * Created by CANC on 2017/8/29.
  */
-class MyApplication : Application() {
+class MyApplication : MultiDexApplication() {
     var instance: Context? = null
     var netComponent: NetComponent? = null
 

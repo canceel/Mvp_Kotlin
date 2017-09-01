@@ -20,6 +20,7 @@ ext {
 
     dependencies = [
             //support
+            "multidex"                 : "com.android.support:multidex:1.0.1",
             "appcompat-v7"             : "com.android.support:appcompat-v7:${version["androidSupportSdkVersion"]}",
             "recyclerview-v7"          : "com.android.support:recyclerview-v7:${version["androidSupportSdkVersion"]}",
             "kotlin"                   : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${version["kotlinversion"]}",

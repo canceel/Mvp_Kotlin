@@ -6,7 +6,7 @@ import io.reactivex.disposables.Disposable
 /**
  * Created by CANC on 2017/8/29.
  */
-abstract class CodeHandledSubscriber<T> : Observer<T> {
+abstract class CodeHandledSubscriber<Any> : Observer<Any> {
     override fun onSubscribe(d: Disposable?) {
     }
 
@@ -17,7 +17,7 @@ abstract class CodeHandledSubscriber<T> : Observer<T> {
         onComplete()
     }
 
-    override fun onNext(value: T) {
+    override fun onNext(value: Any) {
         if (value is BaseResult) {
             var baseResult: BaseResult = value
             if (!baseResult.error) {
@@ -29,6 +29,6 @@ abstract class CodeHandledSubscriber<T> : Observer<T> {
         onComplete()
     }
 
-    abstract fun onNextSuccess(t: T)
-    abstract fun onNextError(errorResult: BaseResult?)
+    abstract fun onNextSuccess(result: Any)
+    abstract fun onNextError(baseResult: BaseResult?)
 }

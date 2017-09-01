@@ -64,7 +64,7 @@ class AndroidAdapter(val context: Context,
     }
 
     override fun getItemCount(): Int {
-        return if (datas == null) 0 else datas!!.size
+        return datas?.size
     }
 
 
