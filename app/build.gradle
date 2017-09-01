@@ -3,6 +3,48 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 android {
+    signingConfigs {
+        key {
+            keyAlias rootProject.ext.signingConfig.KEY_ALIAS
+            keyPassword rootProject.ext.signingConfig.KEY_PASSWORD
+            storeFile file(rootProject.ext.signingConfig.KEY_FILE)
+            storePassword rootProject.ext.signingConfig.KEY_STORE_PASSWORD
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+            signingConfig signingConfigs.key
+            debuggable true
+        }
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            signingConfig signingConfigs.key
+            jniDebuggable false
+            renderscriptDebuggable false
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def date = new Date();
+                    def formattedDate = date.format('yyyyMMdd')
+                    output.outputFile = new File(output.outputFile.parent,
+                            output.outputFile.name.replace("-release", "-v" + defaultConfig.versionName + "-" + formattedDate + "-release"))
+                }
+            }
+        }
+    }
+
+    //此处添加渠道，gradle会自动打包
+    productFlavors {
+        //官网渠道
+        Guanwang {}
+    }
+
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
