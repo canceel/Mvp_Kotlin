@@ -51,7 +51,8 @@ ext {
             "timber"                   : "com.jakewharton.timber:timber:4.5.1",
             "SmartRefreshLayout"       : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.2-alpha-7",
             "SmartRefreshHeader"       : "com.scwang.smartrefresh:SmartRefreshHeader:1.0.2-alpha-7",
-            "jsoup"                    : "org.jsoup:jsoup:1.10.1"
+            "jsoup"                    : "org.jsoup:jsoup:1.10.1",
+            "matisse"                  : "com.zhihu.android:matisse:0.4.3"//知乎图片选择框架
     ]
 
 }
