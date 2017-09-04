@@ -1,8 +1,11 @@
 package com.shenme.mvp_kotlin.mvp.presenter
 
+import android.Manifest
+import android.util.Log
 import com.shenme.mvp_kotlin.app.data.response.ResponseGank
 import com.shenme.mvp_kotlin.app.net.BaseResult
 import com.shenme.mvp_kotlin.app.net.CodeHandledSubscriber
+import com.shenme.mvp_kotlin.app.utils.PermissionUtils
 import com.shenme.mvp_kotlin.app.utils.RxUtils
 import com.shenme.mvp_kotlin.mvp.contract.AndroidContract
 import com.shenme.mvp_kotlin.mvp.model.api.ApiService
@@ -13,8 +16,7 @@ import javax.inject.Inject
 /**
  * Created by CANC on 2017/8/29.
  */
-class AndroidPresenter : AndroidContract.Presenter {
-
+class AndroidPresenter : AndroidContract.Presenter, PermissionUtils.PermissionLisenter {
     var apiService: ApiService
     var view: AndroidContract.View
 
@@ -155,4 +157,27 @@ class AndroidPresenter : AndroidContract.Presenter {
                     }
                 })
     }
+
+
+    /**
+     * 权限申请使用示例
+     */
+    fun getLocationPermission() {
+        PermissionUtils().requierPermission(view.getRxpermissions(), this, Manifest.permission.CAMERA,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.RECORD_AUDIO)
+    }
+
+    override fun requirePermissionSuccess(permissionName: String) {
+        Log.d("Permission", "Agree " + permissionName)
+    }
+
+    override fun refusePermission(permissionName: String) {
+        Log.d("Permission", "Refuse " + permissionName)
+    }
+
+    override fun forbiddenPermission(permissionName: String) {
+        Log.d("Permission", "Refuse & don't require Again " + permissionName)
+    }
+
 }

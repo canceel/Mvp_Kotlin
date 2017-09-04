@@ -2,6 +2,7 @@ package com.shenme.mvp_kotlin.mvp.contract
 
 import com.shenme.mvp_kotlin.app.base.IView
 import com.shenme.mvp_kotlin.app.data.response.Gank
+import com.tbruyelle.rxpermissions2.RxPermissions
 
 /**
  * Created by CANC on 2017/8/29.
@@ -15,6 +16,8 @@ interface AndroidContract {
         fun refreshComplete()
 
         fun setData(datas: List<Gank>)
+
+        fun getRxpermissions(): RxPermissions
     }
 
     interface Presenter {

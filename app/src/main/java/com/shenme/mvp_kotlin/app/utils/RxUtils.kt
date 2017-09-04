@@ -11,9 +11,9 @@ import com.trello.rxlifecycle2.components.support.RxFragment
 class RxUtils {
     fun <T> bindToLifecycle(view: IView): LifecycleTransformer<T> {
         if (view is RxAppCompatActivity) {
-            return (view as RxAppCompatActivity).bindToLifecycle<T>()
+            return view.bindToLifecycle<T>()
         } else if (view is RxFragment) {
-            return (view as RxFragment).bindToLifecycle<T>()
+            return view.bindToLifecycle<T>()
         } else {
             throw IllegalArgumentException("view isn't activity or fragment")
         }

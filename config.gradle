@@ -20,6 +20,7 @@ ext {
 
     dependencies = [
             //support
+            "multidex"                 : "com.android.support:multidex:1.0.1",
             "appcompat-v7"             : "com.android.support:appcompat-v7:${version["androidSupportSdkVersion"]}",
             "recyclerview-v7"          : "com.android.support:recyclerview-v7:${version["androidSupportSdkVersion"]}",
             "kotlin"                   : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${version["kotlinversion"]}",
@@ -42,6 +43,7 @@ ext {
             "rxandroid2"               : "io.reactivex.rxjava2:rxandroid:2.0.1",
             "rxlifecycle2"             : "com.trello.rxlifecycle2:rxlifecycle:${version["rxlifecycle2SdkVersion"]}",
             "rxlifecycle2-components"  : "com.trello.rxlifecycle2:rxlifecycle-components:${version["rxlifecycle2SdkVersion"]}",
+            "rxpermissions2"           : "com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar",
             //tools
             "dagger2"                  : "com.google.dagger:dagger:${version["dagger2SdkVersion"]}",
             "dagger2-compiler"         : "com.google.dagger:dagger-compiler:${version["dagger2SdkVersion"]}",
@@ -49,7 +51,8 @@ ext {
             "timber"                   : "com.jakewharton.timber:timber:4.5.1",
             "SmartRefreshLayout"       : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.2-alpha-7",
             "SmartRefreshHeader"       : "com.scwang.smartrefresh:SmartRefreshHeader:1.0.2-alpha-7",
-            "jsoup"       : "org.jsoup:jsoup:1.10.1"
+            "jsoup"                    : "org.jsoup:jsoup:1.10.1",
+            "matisse"                  : "com.zhihu.android:matisse:0.4.3"//知乎图片选择框架
     ]
 
 }
