@@ -18,10 +18,12 @@ import com.shenme.mvp_kotlin.R
 /**
  * Created by CANC on 2017/8/31.
  */
-class FilterDialogFragment constructor(contentUrl: String) : DialogFragment() {
+class FilterDialogFragment constructor(contentUrl: String, title: String) : DialogFragment() {
     var url: String = contentUrl
+    var pageTitle = title
     lateinit var llBrowser: LinearLayout
     lateinit var llCopy: LinearLayout
+    lateinit var llShare: LinearLayout
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -43,6 +45,7 @@ class FilterDialogFragment constructor(contentUrl: String) : DialogFragment() {
     fun initData(mView: View) {
         llBrowser = mView.findViewById(R.id.ll_browser) as LinearLayout
         llCopy = mView.findViewById(R.id.ll_copy) as LinearLayout
+        llShare = mView.findViewById(R.id.ll_share) as LinearLayout
         llBrowser.setOnClickListener {
             var intent = Intent()
             intent.action = "android.intent.action.VIEW"
@@ -60,6 +63,17 @@ class FilterDialogFragment constructor(contentUrl: String) : DialogFragment() {
             // 将ClipData内容放到系统剪贴板里。
             cm.primaryClip = mClipData
             dismiss()
+        }
+
+        llShare.setOnClickListener {
+            var intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TITLE, pageTitle)//标题
+            intent.putExtra(Intent.EXTRA_SUBJECT, pageTitle)//标题
+            intent.putExtra(Intent.EXTRA_TEXT, pageTitle)  //内容
+            var content_url = Uri.parse(url)
+            intent.data = content_url
+            startActivity(Intent.createChooser(intent, "分享"))
         }
     }
 }

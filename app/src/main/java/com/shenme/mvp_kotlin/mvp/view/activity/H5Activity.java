@@ -1,7 +1,6 @@
 package com.shenme.mvp_kotlin.mvp.view.activity;
 
 import android.graphics.Bitmap;
-import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,6 +33,7 @@ public class H5Activity extends BaseActivity {
     private TextView tvTitle;
     private ImageView ivMore;
     private String contentUrl;
+    private String pageTitle = "";
 
     private FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
@@ -61,7 +61,7 @@ public class H5Activity extends BaseActivity {
                 if (fragment != null) {
                     fragmentTransaction.remove(fragment);
                 }
-                FilterDialogFragment dialogFragment = new FilterDialogFragment(contentUrl);
+                FilterDialogFragment dialogFragment = new FilterDialogFragment(contentUrl, pageTitle);
                 dialogFragment.show(fragmentManager, "dialogFragment");//显示一个Fragment并且给该Fragment添加一个Tag，可通过findFragmentByTag找到该Fragment
             }
         });
@@ -155,6 +155,7 @@ public class H5Activity extends BaseActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 tvTitle.setText(title);
+                pageTitle = title;
                 super.onReceivedTitle(view, title);
             }
         });

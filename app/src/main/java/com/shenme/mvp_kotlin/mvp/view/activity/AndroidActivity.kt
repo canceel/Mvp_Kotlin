@@ -3,10 +3,10 @@ package com.shenme.mvp_kotlin.mvp.view.activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.Toast
 import com.shenme.mvp_kotlin.R
 import com.shenme.mvp_kotlin.app.MyApplication
 import com.shenme.mvp_kotlin.app.base.RefreshActivity
+import com.shenme.mvp_kotlin.app.base.toast
 import com.shenme.mvp_kotlin.app.data.response.Gank
 import com.shenme.mvp_kotlin.app.utils.StatusBarUtil
 import com.shenme.mvp_kotlin.di.component.DaggerAndroidComponent
@@ -18,7 +18,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_android.*
 import javax.inject.Inject
 
-open class AndroidActivity : RefreshActivity(), AndroidContract.View, AndroidAdapter.AndroidListener {
+class AndroidActivity : RefreshActivity(), AndroidContract.View, AndroidAdapter.AndroidListener {
 
     open var REQUEST_TYPE: String = "request_type"
     var requestType: String? = null
@@ -130,7 +130,7 @@ open class AndroidActivity : RefreshActivity(), AndroidContract.View, AndroidAda
     }
 
     override fun showMessage(message: String) {
-        Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show()
+        toast(message)
     }
 
     override fun setData(result: List<Gank>) {
@@ -149,5 +149,4 @@ open class AndroidActivity : RefreshActivity(), AndroidContract.View, AndroidAda
     override fun getRxpermissions(): RxPermissions {
         return rxPermission
     }
-
 }

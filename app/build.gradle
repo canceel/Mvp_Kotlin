@@ -72,15 +72,14 @@ kapt {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     //support
     compile rootProject.ext.dependencies["multidex"]
-    compile(rootProject.ext.dependencies["appcompat-v7"])
     compile(rootProject.ext.dependencies["kotlin"])
-    compile(rootProject.ext.dependencies["junit"])
     compile(rootProject.ext.dependencies["test_espresso"]) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+    compile(rootProject.ext.dependencies["anko"])
     //view
     compile(rootProject.ext.dependencies["recyclerview-v7"])
     compile(rootProject.ext.dependencies["constraint-layout"])
@@ -91,17 +90,6 @@ dependencies {
     compile(rootProject.ext.dependencies["retrofit-converter-gson"])
     compile(rootProject.ext.dependencies["okhttp3"])
     compile(rootProject.ext.dependencies["okhttp3_logging"])
-    compile(rootProject.ext.dependencies["rxandroid2"])
-    compile(rootProject.ext.dependencies["rxlifecycle2"]) {
-        exclude module: 'rxjava'
-    }
-    compile(rootProject.ext.dependencies["rxlifecycle2-components"]) {
-        exclude module: 'support-v4'
-        exclude module: 'appcompat-v7'
-        exclude module: 'support-annotations'
-        exclude module: 'rxjava'
-        exclude module: 'rxandroid'
-    }
     compile(rootProject.ext.dependencies["glide"])
     //tools
     compile rootProject.ext.dependencies["dagger2"]
@@ -111,4 +99,5 @@ dependencies {
     compile(rootProject.ext.dependencies["SmartRefreshLayout"])
     compile(rootProject.ext.dependencies["SmartRefreshHeader"])
     compile(rootProject.ext.dependencies["rxpermissions2"])
+    compile project(':swipebacklayout')
 }

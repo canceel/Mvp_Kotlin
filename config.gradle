@@ -15,7 +15,8 @@ ext {
             glideSdkVersion         : "3.8.0",
             rxlifecycle2SdkVersion  : "2.0.1",
             kotlinversion           : "1.1.3-2",
-            rxkotlin                : "2.1.0"
+            rxkotlin                : "2.1.0",
+            anko_version            : "0.10.1"
     ]
 
     dependencies = [
@@ -24,6 +25,7 @@ ext {
             "appcompat-v7"             : "com.android.support:appcompat-v7:${version["androidSupportSdkVersion"]}",
             "recyclerview-v7"          : "com.android.support:recyclerview-v7:${version["androidSupportSdkVersion"]}",
             "kotlin"                   : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${version["kotlinversion"]}",
+            "anko"                     : "org.jetbrains.anko:anko:${version["anko_version"]}",
             //test
             "junit"                    : "junit:junit:4.12",
             "test_espresso"            : "com.android.support.test.espresso:espresso-core:2.2.2",
