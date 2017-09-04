@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.*
+import android.view.WindowManager.LayoutParams
 import android.widget.LinearLayout
 import com.shenme.mvp_kotlin.R
 
@@ -25,14 +26,16 @@ class FilterDialogFragment constructor(contentUrl: String) : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         //放置位置
-        dialog.window.setGravity(Gravity.LEFT)
         dialog.window.setGravity(Gravity.BOTTOM)
         //设置布局
         var mView = LayoutInflater.from(activity).inflate(R.layout.dialog_fragment_filter, null)
         dialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.window.setWindowAnimations(R.style.anim_popup_bottombar)
-
+        dialog.window.decorView.setPadding(0, 0, 0, 0)
+        var lp = dialog.window.attributes
+        lp.width = LayoutParams.MATCH_PARENT
+        lp.height = LayoutParams.WRAP_CONTENT
+        dialog.window.attributes = lp
         initData(mView)
         return mView
     }
