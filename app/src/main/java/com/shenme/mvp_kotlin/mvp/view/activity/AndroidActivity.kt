@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import com.shenme.mvp_kotlin.R
 import com.shenme.mvp_kotlin.app.MyApplication
 import com.shenme.mvp_kotlin.app.base.RefreshActivity
-import com.shenme.mvp_kotlin.app.base.toast
 import com.shenme.mvp_kotlin.app.data.response.Gank
 import com.shenme.mvp_kotlin.app.utils.StatusBarUtil
 import com.shenme.mvp_kotlin.di.component.DaggerAndroidComponent
@@ -16,6 +15,7 @@ import com.shenme.mvp_kotlin.mvp.presenter.AndroidPresenter
 import com.shenme.mvp_kotlin.mvp.view.adapter.AndroidAdapter
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_android.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class AndroidActivity : RefreshActivity(), AndroidContract.View, AndroidAdapter.AndroidListener {
@@ -143,10 +143,17 @@ class AndroidActivity : RefreshActivity(), AndroidContract.View, AndroidAdapter.
         var intent = Intent()
         intent.setClass(mActivity, H5Activity::class.java)
         intent.putExtra(BrowserActivity().WEB_URL, url)
-        startActivity(intent)
+        launchActivity(intent)
     }
 
     override fun getRxpermissions(): RxPermissions {
         return rxPermission
+    }
+
+    /**
+     *
+     */
+    override fun launchActivity(intent: Intent) {
+        startActivity(intent)
     }
 }

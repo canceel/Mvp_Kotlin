@@ -128,7 +128,6 @@ public class H5Activity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 progressBar.setVisibility(View.GONE);
-
                 super.onPageFinished(view, url);
             }
 
@@ -136,12 +135,19 @@ public class H5Activity extends BaseActivity {
             @Override
             public void onLoadResource(WebView view, String url) {
                 super.onLoadResource(view, url);
+            }
 
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url.startsWith("intent") || url.startsWith("youku")) {
+                    return true;
+                } else {
+                    return super.shouldOverrideUrlLoading(view, url);
+                }
             }
         });
 
         webView.setWebChromeClient(new WebChromeClient() {
-
             // 设置网页加载的进度条
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -160,9 +166,7 @@ public class H5Activity extends BaseActivity {
             }
         });
 
-
         webView.loadUrl(contentUrl);
-//        webView.loadDataWithBaseURL(null, getNewContent(""), "text/html", "utf-8", null);
 
         webView.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -177,9 +181,7 @@ public class H5Activity extends BaseActivity {
                 return false;
             }
         });
-
     }
-
 
     @Override
     protected void onDestroy() {
